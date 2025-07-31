@@ -58,13 +58,18 @@ export default function BatchTransactions() {
       {batchLoading && <CircularProgress size={26} sx={{ ml: 2 }} />}
       {batchRes && typeof batchRes === "object" && (
         <Box mt={2}>
-          <Typography>Result:</Typography>
-          <pre style={{ background: "#f5f5f5", padding: 8, borderRadius: 4 }}>
-            {batchRes[0]?.totalFee ?? "No result available"}
-          </pre>
-          <Typography fontSize={14}>
-            Details: {JSON.stringify(batchRes[0]?.appliedRules)}
-          </Typography>
+          <Typography>Batch Results:</Typography>
+          {batchRes.map((result, index) => (
+            <Box
+              key={index}
+              mb={2}
+              style={{ background: "#f5f5f5", padding: 8, borderRadius: 4 }}
+            >
+              <Typography>
+                Result #{index + 1}: {result.totalFee ?? "No result available"}
+              </Typography>
+            </Box>
+          ))}
         </Box>
       )}
     </Box>

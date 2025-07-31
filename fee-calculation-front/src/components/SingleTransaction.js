@@ -21,7 +21,7 @@ export default function SingleTransaction() {
   const [singleLoad, setSingleLoad] = useState(false);
 
   function handleSingleChange(e) {
-    setSingle((s) => ({ ...s, [e.target.name]: e.target.value }));
+    setSingle((s) => ({ ...s, [e.target.name]: e.target.value.toUpperCase() }));
   }
 
   async function submitSingle(e) {
@@ -40,7 +40,6 @@ export default function SingleTransaction() {
     }
     setSingleLoad(false);
   }
-  console.log("singleRes", singleRes);
 
   return (
     <Box component="form" onSubmit={submitSingle} sx={{ maxWidth: 450 }}>
@@ -58,7 +57,7 @@ export default function SingleTransaction() {
         fullWidth
         margin="normal"
         name="type"
-        label="Type (POS, ecommerce, ...)"
+        label="Type (POS, ECOMMERCE, ...)"
         value={single.type}
         required
         onChange={handleSingleChange}
@@ -91,9 +90,8 @@ export default function SingleTransaction() {
       {singleLoad && <CircularProgress size={28} sx={{ ml: 2 }} />}
       {singleRes && !singleRes.error && (
         <Box mt={2}>
-          <Typography color="primary">Result: {singleRes.totalFee} €</Typography>
-          <Typography fontSize={14}>
-            Details: {JSON.stringify(singleRes.appliedRules)}
+          <Typography color="primary">
+            Result: {singleRes.totalFee} €
           </Typography>
         </Box>
       )}
